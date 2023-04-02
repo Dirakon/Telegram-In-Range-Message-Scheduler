@@ -1,0 +1,7 @@
+{ 
+    "startDayInclusive": "2023-05-01",
+    "endDayInclusive": "2023-09-02", 
+    "startHourInclusive": 17,
+    "endHourInclusive": 22,
+    "availableDays": { "sunday":true, "monday":true, "tuesday":true, "wednesday":true, "thursday":true, "friday":true, "saturday":true}
+}
