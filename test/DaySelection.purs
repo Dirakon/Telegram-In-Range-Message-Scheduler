@@ -7,7 +7,7 @@ import Prelude
 
 import Control.Monad.Free (Free)
 import Data.Date (Date, Day, Month(..), Year, canonicalDate, exactDate)
-import Data.Either (Either(..))
+import Data.Either (Either(..), isLeft)
 import Data.Enum (toEnum)
 import Data.JSDate (parse, toDate)
 import Data.Maybe (Maybe(..))
@@ -45,6 +45,9 @@ daySelectionTests =
         secondDayWednesdayStartSomeAvailable
         eleventhDayWednesdayStartSomeAvailable
         twentyFirstDayWednesdayStartSomeAvailable
+    suite "no days available" do
+      firstDayNoDaysAvailable
+      secondDayNoDaysAvailable
 
 firstDayMondayStartAllAvailable :: Free TestF Unit
 firstDayMondayStartAllAvailable =
@@ -110,10 +113,22 @@ eleventhDayMondayStartSomeAvailable =
       Assert.equal (Right $ unsafeJust $ exactDate (unsafeJust $ toEnum 2023) (April) (unsafeJust $ toEnum  (27)))
         $ takeSuitableDay mondayStart everySecondDayAvailable  10
 twentyFirstDayMondayStartSomeAvailable :: Free TestF Unit
-twentyFirstDayMondayStartSomeAvailable =
+twentyFirstDayMondayStartSomeAvailable = suite "" do
     test "Selects twenty first day from monday start" do
       Assert.equal (Right $ unsafeJust $ exactDate (unsafeJust $ toEnum 2023) (May) (unsafeJust $ toEnum  ( 20)))
         $ takeSuitableDay mondayStart everySecondDayAvailable  20
+    test "Selects twenty second day from monday start" do
+      Assert.equal (Right $ unsafeJust $ exactDate (unsafeJust $ toEnum 2023) (May) (unsafeJust $ toEnum  ( 23)))
+        $ takeSuitableDay mondayStart everySecondDayAvailable  21
+    test "Selects twenty third day from monday start" do
+      Assert.equal (Right $ unsafeJust $ exactDate (unsafeJust $ toEnum 2023) (May) (unsafeJust $ toEnum  ( 25)))
+        $ takeSuitableDay mondayStart everySecondDayAvailable  22
+    test "Selects twenty fourth day from monday start" do
+      Assert.equal (Right $ unsafeJust $ exactDate (unsafeJust $ toEnum 2023) (May) (unsafeJust $ toEnum  ( 27)))
+        $ takeSuitableDay mondayStart everySecondDayAvailable  23
+    test "Selects twenty fifth day from monday start" do
+      Assert.equal (Right $ unsafeJust $ exactDate (unsafeJust $ toEnum 2023) (May) (unsafeJust $ toEnum  ( 30)))
+        $ takeSuitableDay mondayStart everySecondDayAvailable  24
 
 firstDayWednesdayStartSomeAvailable :: Free TestF Unit
 firstDayWednesdayStartSomeAvailable =
@@ -132,7 +147,34 @@ eleventhDayWednesdayStartSomeAvailable =
       Assert.equal (Right $ unsafeJust $ exactDate (unsafeJust $ toEnum 2023) (April) (unsafeJust $ toEnum  (29)))
         $ takeSuitableDay wednesdayStart everySecondDayAvailable  10
 twentyFirstDayWednesdayStartSomeAvailable :: Free TestF Unit
-twentyFirstDayWednesdayStartSomeAvailable =
+twentyFirstDayWednesdayStartSomeAvailable = suite "" do
     test "Selects twenty first day from wednesday start" do
       Assert.equal (Right $ unsafeJust $ exactDate (unsafeJust $ toEnum 2023) (May) (unsafeJust $ toEnum  (23)))
         $ takeSuitableDay wednesdayStart everySecondDayAvailable  20
+    test "Selects twenty second day from wednesday start" do
+      Assert.equal (Right $ unsafeJust $ exactDate (unsafeJust $ toEnum 2023) (May) (unsafeJust $ toEnum  (25)))
+        $ takeSuitableDay wednesdayStart everySecondDayAvailable  21
+
+    test "Selects twenty third day from wednesday start" do
+      Assert.equal (Right $ unsafeJust $ exactDate (unsafeJust $ toEnum 2023) (May) (unsafeJust $ toEnum  (27)))
+        $ takeSuitableDay wednesdayStart everySecondDayAvailable  22
+
+    test "Selects twenty fourth day from wednesday start" do
+      Assert.equal (Right $ unsafeJust $ exactDate (unsafeJust $ toEnum 2023) (May) (unsafeJust $ toEnum  (30)))
+        $ takeSuitableDay wednesdayStart everySecondDayAvailable  23
+
+    test "Selects twenty fifth day from wednesday start" do
+      Assert.equal (Right $ unsafeJust $ exactDate (unsafeJust $ toEnum 2023) (June) (unsafeJust $ toEnum  (1)))
+        $ takeSuitableDay wednesdayStart everySecondDayAvailable  24
+
+
+firstDayNoDaysAvailable :: Free TestF Unit
+firstDayNoDaysAvailable =
+    test "Selects first day from wednesday start" do
+      Assert.assert ""  $isLeft
+        $ takeSuitableDay wednesdayStart noDaysAvailable  0
+secondDayNoDaysAvailable :: Free TestF Unit
+secondDayNoDaysAvailable =
+    test "Selects second day from wednesday start" do
+      Assert.assert "" $ isLeft
+        $ takeSuitableDay wednesdayStart noDaysAvailable  1
