@@ -9,7 +9,6 @@ import Data.JSDate (parse, toDate)
 import Data.Maybe (Maybe(..))
 import Effect (Effect)
 import Effect.Class.Console (log)
-import Main (AvailableDays, countSuitableDays, unsafeJust)
 import Partial.Unsafe (unsafePartial)
 import Test.Unit (TestF, suite, test)
 import Test.Unit.Assert as Assert

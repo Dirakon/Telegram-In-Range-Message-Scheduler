@@ -4,6 +4,7 @@ import Prelude
 
 import Data.DateTime.Instant (Instant)
 import Data.Int (toNumber)
+import Data.Number (round)
 import Data.Time.Duration (Milliseconds(..))
 import DateUtils (millisecondsInHour)
 import Effect (Effect)
@@ -18,5 +19,5 @@ chooseTimeOffset startingHourInclusive endHourInclusive =
         chosenHour <- randomInt startingHourInclusive endHourInclusive
         let hourMilliseconds = millisecondsInHour * (toNumber chosenHour)
         inHourMilliseconds   <- randomRange 0.0 millisecondsInHour
-        pure $ Milliseconds ( hourMilliseconds + inHourMilliseconds)
+        pure $ Milliseconds ( round $ hourMilliseconds + inHourMilliseconds)
         

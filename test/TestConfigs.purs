@@ -9,11 +9,12 @@ import Data.JSDate (parse, toDate)
 import Data.Maybe (Maybe(..))
 import Effect (Effect)
 import Effect.Class.Console (log)
-import Main (AvailableDays, countSuitableDays, unsafeJust)
+import MaybeUtils (unsafeJust)
 import Partial.Unsafe (unsafePartial)
 import Test.Unit (TestF, suite, test)
 import Test.Unit.Assert as Assert
 import Test.Unit.Main (runTest)
+import Types (AvailableDays)
 
 allDaysAvailable:: AvailableDays
 allDaysAvailable = { "sunday":true, "monday":true, "tuesday":true, "wednesday":true, "thursday":true, "friday":true, "saturday":true}
