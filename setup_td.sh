@@ -1,4 +1,4 @@
-# Setting up to use https://github.com/tdlib/td
+# Setting up to use https://github.com/Bannerets/tdl
 
 mkdir td
 cd td
