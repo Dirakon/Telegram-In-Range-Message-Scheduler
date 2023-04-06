@@ -3,10 +3,10 @@ module Types where
 import Prelude
 
 type RangeSettings
-  = { startDayInclusive :: String
-    , endDayInclusive :: String
-    , startHourInclusive :: Int
-    , endHourInclusive :: Int
+  = { startDayInclusiveUtc :: String
+    , endDayInclusiveUtc :: String
+    , startHourInclusiveUtc :: Int
+    , endHourInclusiveUtc :: Int
     , availableDays :: AvailableDays
     }
 

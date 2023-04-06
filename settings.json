@@ -1,7 +1,7 @@
 { 
-    "startDayInclusive": "2023-05-01",
-    "endDayInclusive": "2023-05-10", 
-    "startHourInclusive": 14,
-    "endHourInclusive": 19,
-    "availableDays": { "sunday":true, "monday":false, "tuesday":true, "wednesday":true, "thursday":true, "friday":true, "saturday":false}
+    "startDayInclusiveUtc": "2023-04-10",
+    "endDayInclusiveUtc": "2023-04-30", 
+    "startHourInclusiveUtc": 14,
+    "endHourInclusiveUtc": 19,
+    "availableDays": { "sunday":false, "monday":false, "tuesday":false, "wednesday":true, "thursday":true, "friday":true, "saturday":true}
 }
